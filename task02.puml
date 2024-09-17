@@ -1,0 +1,113 @@
+@startuml
+'Автор: Дадыков А. Е., 2024
+
+header ВШЭ, ПИ 3 курс, БД, Задание 2
+
+package "Задача 1: Библиотечная система" {
+    entity "Экземпляр книги" as Copy {
+        + Номер копии [PK]
+        ---
+        Положение на полке
+        Дата возврата
+    }
+
+    entity "Книга" as Book {
+        + ISBN [PK]
+        ---
+        Название
+        Автор
+        Год издания
+        Количество страниц
+    }
+
+    entity "Издатель" as Publisher {
+        + Название издателя [PK]
+        ---
+        Адрес
+    }
+
+    entity "Категория" as Category {
+        + Имя категории [PK]
+    }
+
+    entity "Читатель" as Reader {
+        + Номер читателя [PK]
+        ---
+        Фамилия
+        Имя
+        Адрес
+        Дата рождения
+    }
+
+    Copy }o--|| Book : "принадлежит"
+    Book ||--o{ Publisher : "издан"
+    Book }o--o{ Category : "принадлежит"
+    Category ||--o{ Category : "подкатегория"
+    Reader ||--o{ Copy : "берет"
+}
+
+package "Задача 2: Отношения" {
+    rectangle "Квартира и расположение" {
+        entity "Квартира" as Apartment {
+            + [PK]
+        }
+
+        entity "Дом" as Building {
+            + [PK]
+        }
+
+        entity "Улица" as Street {
+            + [PK]
+        }
+
+        entity "Город" as City {
+            + [PK]
+        }
+
+        entity "Страна" as Country {
+            + [PK]
+        }
+
+        Apartment }o--|| Building : "расположена в"
+        Building ||--o{ Street : "находится на"
+        Street ||--o{ City : "в"
+        City ||--o{ Country : "в"
+    }
+
+    rectangle "Футбольный матч" {
+        entity "Команда" as Team {
+            + [PK]
+        }
+
+        entity "Арбитр" as Referee {
+            + [PK]
+        }
+
+        entity "Футбольный матч" as Match {
+            + [PK]
+        }
+
+        Match ||--|| Team : "первая команда"
+        Match ||--|| Team : "вторая команда"
+        Match ||--|{ Referee : "судится арбитром"
+    }
+
+    rectangle "Семейные отношения" {
+        entity "Человек" as Person {
+            + [PK]
+        }
+
+        Person }o--|| Person : "отец"
+        Person }o--|| Person : "мать"
+    }
+}
+
+legend
+    <b>Обозначения</b>
+    [PK] - первичный ключ
+endlegend
+
+footer Дадыков А. Е., БПИ225, сентябрь 2024
+
+@enduml
+
