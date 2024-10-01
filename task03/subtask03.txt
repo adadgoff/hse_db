@@ -1,0 +1,37 @@
+Table Station {
+    stat_nr INTEGER [pk, increment]
+    name VARCHAR [not null, unique]
+}
+
+Table Room {
+    room_nr INTEGER [pk, increment]
+    station_id INTEGER [not null, ref: > Station.stat_nr]
+    beds INTEGER [not null]
+}
+
+Table StationPersonell {
+    pers_nr INTEGER [pk, increment]
+    name VARCHAR [not null]
+    station_id INTEGER [not null, ref: > Station.stat_nr]
+}
+
+Table Doctor {
+    id INTEGER [pk, increment, ref: > StationPersonell.pers_nr]
+    area VARCHAR [not null]
+    rank VARCHAR [not null]
+}
+
+Table Caregiver {
+    id INTEGER [pk, increment, ref: > StationPersonell.pers_nr]
+    qualification VARCHAR [not null]
+}
+
+Table Patient {
+    patient_nr INTEGER [pk, increment]
+    treated_by_id INTEGER [not null, ref: > Doctor.id]
+    room_id INTEGER [not null, ref: > Room.room_nr]
+    name VARCHAR [not null]
+    disease VARCHAR [not null]
+    admission_from DATETIME [not null]
+    admission_to DATETIME
+}

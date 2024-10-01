@@ -1,0 +1,33 @@
+Table Station {
+    id INTEGER [pk, increment]
+    name VARCHAR [not null, unique]
+    tracks INTEGER
+    city_id INTEGER [not null, ref: > City.id]
+}
+
+Table Train {
+    train_nr INTEGER [pk, increment]
+    length INTEGER
+    start_station_id INTEGER [not null, ref: > Station.id]
+    end_station_id INTEGER [not null, ref: > Station.id]
+}
+
+Table Connected {
+    from_station_id INTEGER [not null, ref: > Station.id]
+    to_station_id INTEGER [not null, ref: > Station.id]
+    departure DATETIME [not null]
+    arrival DATETIME [not null]
+    id INTEGER [pk, increment]
+}
+
+Table TrainConnected {
+    id INTEGER [pk, increment]
+    connected_id INTEGER [not null, ref: > Connected.id]
+    train_id INTEGER [not null, ref: > Train.train_nr]
+}
+
+Table City {
+    id INTEGER [pk, increment]
+    name VARCHAR [not null, unique]
+    region VARCHAR [not null, unique]
+}

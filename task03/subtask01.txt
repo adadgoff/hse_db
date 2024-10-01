@@ -1,0 +1,38 @@
+Table Copy {
+    id INTEGER [pk, increment]
+    shelf_location VARCHAR [not null]
+    return_date DATE
+    book_id INTEGER [not null, ref: > Book.id]
+    reader_id INTEGER [ref: > Reader.id]
+}
+
+Table Book {
+    id INTEGER [pk, increment]
+    ISBN VARCHAR [not null]
+    title VARCHAR [not null]
+    author VARCHAR [not null]
+    publication_year INTEGER [not null]
+    pages_count INTEGER [not null]
+    publisher_id INTEGER [not null, ref: > Publisher.id]
+    category_id INTEGER [ref: > Category.id]
+}
+
+Table Publisher {
+    id INTEGER [pk, increment]
+    publisher_name VARCHAR [not null]
+    address VARCHAR [not null]
+}
+
+Table Category {
+    id INTEGER [pk, increment]
+    category_name VARCHAR [not null]
+    parent_category_id INTEGER [ref: > Category.id]
+}
+
+Table Reader {
+    id INTEGER [pk, increment]
+    last_name VARCHAR [not null]
+    first_name VARCHAR [not null]
+    address VARCHAR [not null]
+    birth_date DATE [not null]
+}
