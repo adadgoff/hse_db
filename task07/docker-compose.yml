@@ -1,5 +1,5 @@
 services:
-  olipm:
+  olimp:
     image: postgres:alpine
     environment:
       POSTGRES_PASSWORD: $POSTGRES_PASSWORD

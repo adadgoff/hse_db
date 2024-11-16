@@ -5,12 +5,23 @@ description = "Homework #7 for HSE database course."
 authors = ["Artemy Dadykov"]
 
 [tool.poetry.dependencies]
-faker = "^30.8.2"
+python = "^3.12"
+
+[tool.poetry.group.cli.dependencies]
+click = "^8.1.7"
+
+[tool.poetry.group.database.dependencies]
+alembic = "^1.14.0"
 psycopg = {extras = ["binary"], version = "^3.2.3"}
 pydantic-settings = "^2.6.1"
-python = "^3.12"
 sqlmodel = "^0.0.22"
-psycopg2-binary = "^2.9.10"
+
+[tool.poetry.group.formatters.dependencies]
+flake8 = "^7.1.1"
+
+[tool.poetry.group.seed.dependencies]
+faker = "^30.8.2"
+pycountry = "^24.6.1"
 
 [build-system]
 requires = ["poetry-core"]

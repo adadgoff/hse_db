@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import TYPE_CHECKING
 
 from sqlmodel import (
     Field,
@@ -6,8 +7,9 @@ from sqlmodel import (
     SQLModel,
 )
 
-from event import Event
-from country import Country
+from models.event import Event
+if TYPE_CHECKING:
+    from models.country import Country
 
 
 class Olympic(SQLModel, table=True):
@@ -20,13 +22,13 @@ class Olympic(SQLModel, table=True):
 
     city: str = Field(max_length=50)
     year: int
-    start_date: datetime = Field(alias="startdate")
-    end_date: datetime = Field(alias="enddate")
+    startdate: datetime
+    enddate: datetime
 
     country_id: str = Field(
         foreign_key="countries.country_id",
         max_length=3,
     )
 
-    country: Country = Relationship(back_populates="olympics")
+    country: "Country" = Relationship(back_populates="olympics")
     events: list[Event] = Relationship(back_populates="olympic")

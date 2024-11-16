@@ -4,8 +4,8 @@ from sqlmodel import (
     SQLModel,
 )
 
-from olympic import Olympic
-from player import Player
+from models.olympic import Olympic
+from models.player import Player
 
 
 class Country(SQLModel, table=True):

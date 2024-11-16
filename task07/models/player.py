@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import TYPE_CHECKING
 
 from sqlmodel import (
     Field,
@@ -6,8 +7,9 @@ from sqlmodel import (
     SQLModel,
 )
 
-from country import Country
-from result import Result
+if TYPE_CHECKING:
+    from models.country import Country
+    from models.result import Result
 
 
 class Player(SQLModel, table=True):
@@ -26,5 +28,5 @@ class Player(SQLModel, table=True):
         max_length=3,
     )
 
-    country: Country = Relationship(back_populates="players")
-    results: list[Result] = Relationship(back_populates="player")
+    country: "Country" = Relationship(back_populates="players")
+    results: list["Result"] = Relationship(back_populates="player")

@@ -1,6 +1,4 @@
-from sqlmodel import SQLModel
+from cli import cli
 
-from core.db import engine
-
-SQLModel.metadata.drop_all(engine)
-SQLModel.metadata.create_all(engine)
+if __name__ == '__main__':
+    cli()
